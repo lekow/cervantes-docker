@@ -1,0 +1,14 @@
+FROM postgres:latest
+
+# set env variable in order for a non-interactive update process
+ENV DEBIAN_FRONTEND=noninteractive
+
+# update packets
+RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y
+# create new user with lower privileges
+RUN useradd -ms /bin/bash cervantes
+# change permissions of particular directories
+RUN chown -R cervantes /var/lib/postgresql /var/run/postgresql
+
+# switch to the newly created user
+USER cervantes
