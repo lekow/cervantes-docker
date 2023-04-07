@@ -3,7 +3,7 @@ FROM nginx:alpine
 # set env variable in order for a non-interactive update process
 ENV DEBIAN_FRONTEND=noninteractive
 
-# update packets
+# update packages
 RUN apk update && apk upgrade
 # create new user with lower privileges
 RUN adduser -D cervantes

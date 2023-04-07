@@ -28,7 +28,7 @@ ENTRYPOINT ["dotnet", "Cervantes.Web.dll"]
 # set env variable in order for a non-interactive update process
 ENV DEBIAN_FRONTEND=noninteractive
 
-# update packets
+# update packages
 RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y
 # create new user with lower privileges
 RUN useradd -ms /bin/bash cervantes
