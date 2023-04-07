@@ -1,15 +1,14 @@
-FROM nginx:latest
+FROM postgres:alpine
 
 # set env variable in order for a non-interactive update process
 ENV DEBIAN_FRONTEND=noninteractive
 
 # update packets
-RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y
+RUN apk update && apk upgrade
 # create new user with lower privileges
-RUN useradd -ms /bin/bash cervantes
+RUN adduser -D cervantes
 # change permissions of particular directories
-RUN chown -R cervantes /var/cache/nginx /docker-entrypoint.d /etc/nginx
-RUN chown cervantes /var/run
+RUN chown -R cervantes /var/lib/postgresql /var/run/postgresql
 
 # switch to the newly created user
 USER cervantes
